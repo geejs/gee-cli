@@ -1,0 +1,44 @@
+#!/usr/bin/env node
+
+/**
+ * Copyright (c) 2013 Mario Gutierrez <mario@projmate.com>
+ *
+ * See the file LICENSE for copying permission.
+ */
+
+var Fs = require('fs');
+var Path = require('path');
+var findup = require('findup-sync');
+var pkg = require('../package.json');
+var argv = require('minimist')(process.argv.slice(2));
+
+function exit(err) {
+  console.error(err);
+  process.exit(1);
+}
+
+var cwd = process.cwd();
+var core;
+
+// easy hacking on core
+if (Path.basename(cwd) === 'gee') {
+  require(Path.join(cwd, 'node_modules/coffee-script'));
+  core = {
+    cli: function() { require(Path.join(cwd, 'src/cli/gee.coffee')) }
+  };
+}
+
+// else try node_modules in current directory and up
+if (!core) {
+  var found = findup('node_modules/gee', {cwd: process.cwd()});
+  if (found) {
+    core = require(found);
+  } else {
+    exit('gee is a launcher and requires a local `gee`. Try\n  npm install gee --save-dev');
+  }
+}
+
+core.cli();
+
+// vim: set filetype=javascript :
+

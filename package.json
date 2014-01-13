@@ -1,0 +1,28 @@
+{
+  "name": "gee-cli",
+  "version": "0.1.0",
+  "description": "gee launcher",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/geejs/gee-cli"
+  },
+  "keywords": [
+    "build",
+    "project",
+    "templates"
+  ],
+  "author": "Mario Gutierrez <mario@mgutz.com>",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "minimist": "0.0.5",
+    "findup-sync": "~0.1.2"
+  },
+  "bin": {
+    "gee": "bin/gee"
+  }
+}
